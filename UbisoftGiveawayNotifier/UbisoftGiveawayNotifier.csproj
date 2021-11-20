@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+	<RootNamespace>UbisoftGiveawayNotifier</RootNamespace>
+	<RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.38" />
+    <PackageReference Include="MailKit" Version="2.15.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="MimeKit" Version="2.15.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NLog" Version="4.7.12" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
+    <PackageReference Include="Telegram.Bot" Version="17.0.0" />
+  </ItemGroup>
+
+	<Target Name="CopyNlogConfigAfterBuild" AfterTargets="AfterBuild">
+		<Copy SourceFiles="Config File\nlog.config" DestinationFolder="$(OutDir)" />
+	</Target>
+	<Target Name="CopyNlogConfigOnPublish" AfterTargets="Publish">
+		<Copy SourceFiles="Config File\nlog.config" DestinationFolder="$(PublishDir)" />
+	</Target>
+
+	<ItemGroup>
+		<None Update="Config File\config.json" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="Records\Records.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+</Project>

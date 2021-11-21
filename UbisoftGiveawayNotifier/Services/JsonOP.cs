@@ -34,7 +34,7 @@ namespace UbisoftGiveawayNotifier.Services {
 				_logger.LogDebug(JsonOPString.debugLoadRecords);
 				var content = JsonConvert.DeserializeObject<List<FreeGameRecord>>(File.ReadAllText(JsonOPString.recordsPath));
 				_logger.LogDebug($"Done: {JsonOPString.debugLoadRecords}");
-				return content;
+				return content ?? new List<FreeGameRecord>();
 			} catch (Exception) {
 				_logger.LogError($"Error: {JsonOPString.debugLoadRecords}");
 				throw;
@@ -44,9 +44,9 @@ namespace UbisoftGiveawayNotifier.Services {
 		public Config LoadConfig() {
 			try {
 				_logger.LogDebug(JsonOPString.debugLoadConfig);
-				var content = JsonConvert.DeserializeObject<Config>(File.ReadAllText(JsonOPString.configPath)) ?? new Config();
+				var content = JsonConvert.DeserializeObject<Config>(File.ReadAllText(JsonOPString.configPath));
 				_logger.LogDebug($"Done: {JsonOPString.debugLoadConfig}");
-				return content;
+				return content ?? new Config();
 			} catch (Exception) {
 				_logger.LogError($"Error: {JsonOPString.debugLoadConfig}");
 				throw;

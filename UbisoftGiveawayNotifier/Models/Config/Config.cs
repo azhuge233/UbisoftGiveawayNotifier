@@ -1,7 +1,7 @@
 ﻿namespace UbisoftGiveawayNotifier.Models.Config {
-	internal class Config : NotifyConfig {
-		internal bool EnableHeadless { get; set; }
-		internal bool NotifyKeepGamesOnly { get; set; }
-		internal int TimeOutMilliSecond { get; set; }
+	public class Config : NotifyConfig {
+		public bool EnableHeadless { get; set; }
+		public bool NotifyKeepGamesOnly { get; set; }
+		public int TimeOutMilliSecond { get; set; }
 	}
 }

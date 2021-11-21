@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using UbisoftGiveawayNotifier.Modules;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;

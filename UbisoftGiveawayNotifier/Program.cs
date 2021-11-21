@@ -21,23 +21,23 @@ namespace UbisoftGiveawayNotifier {
                     servicesProvider.GetRequiredService<ConfigValidator>().CheckValid(config);
 
                     // Get page source
-                    var source = await servicesProvider.GetRequiredService<Scraper>().GetSteamDBSource(config);
+                    var source = await servicesProvider.GetRequiredService<Scraper>().GetUbisoftSource(config);
                     //var source = System.IO.File.ReadAllText("test.html");
 
                     // Parse page source
-                    var parseResult = servicesProvider.GetRequiredService<Parser>().HtmlParse(source, oldRecord);
+                    var parseResult = servicesProvider.GetRequiredService<Parser>().Parse(source, oldRecord);
 
                     // Notify first, then write records
-                    await servicesProvider.GetRequiredService<NotifyOP>().Notify(config, oldRecord, config.NotifyKeepGamesOnly ? parseResult.PushListKeepOnly : parseResult.PushListAll);
+                    await servicesProvider.GetRequiredService<NotifyOP>().Notify(config, parseResult.Item2);
 
                     // Write new records
-                    jsonOp.WriteData(parseResult.Records);
+                    jsonOp.WriteData(parseResult.Item1);
                 }
 
                 logger.Info(" - Job End -\n");
             } catch (Exception ex) {
                 logger.Error(ex.Message);
-                logger.Error($"{ex.InnerException.Message}\n\n");
+                if (ex.InnerException != null) logger.Error(ex.InnerException.Message);
             } finally {
                 LogManager.Shutdown();
             }

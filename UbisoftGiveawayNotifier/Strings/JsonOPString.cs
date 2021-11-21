@@ -6,9 +6,9 @@
 		#endregion
 
 		#region debug strings
-		internal static readonly string debugWrite = "Write records";
-		internal static readonly string debugLoadConfig = "Load config";
-		internal static readonly string debugLoadRecords = "Load previous records";
+		internal const string debugWrite = "Write records";
+		internal const string debugLoadConfig = "Load config";
+		internal const string debugLoadRecords = "Load previous records";
 		#endregion
 	}
 }

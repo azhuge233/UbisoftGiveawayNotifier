@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using UbisoftGiveawayNotifier.Services;
+using UbisoftGiveawayNotifier.Services.Notifier;
 
 namespace UbisoftGiveawayNotifier.Modules {
 	internal static class DI {

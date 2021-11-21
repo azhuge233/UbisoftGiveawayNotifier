@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Text;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using UbisoftGiveawayNotifier.Models.Config;
@@ -14,25 +15,17 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 		}
 
 		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
-			var sb = new StringBuilder();
-			var BotClient = new TelegramBotClient(token: config.TelegramToken);
+			var BotClient = new TelegramBotClient(token: config.TelegramToken ?? string.Empty);
 
 			try {
 				foreach (var record in records) {
 					_logger.LogDebug($"{NotifierString.debugTelegramSendMessage} : {record.Name}");
 					await BotClient.SendTextMessageAsync(
-						chatId: config.TelegramChatID,
-						text: $"{record.ToTelegramMessage(update: record.IsUpdate)}{NotifyFormatStrings.projectLinkHTML.Replace("<br>", "\n")}",
+						chatId: config.TelegramChatID ?? string.Empty,
+						text: $"{record.ToTelegramMessage()}{NotifyFormatString.projectLinkHTML.Replace("<br>", "\n")}",
 						parseMode: ParseMode.Html
 					);
-					sb.Append(sb.Length == 0 ? record.ID : $",{record.ID}");
 				}
-
-				await BotClient.SendTextMessageAsync(
-						chatId: config.TelegramChatID,
-						text: sb.ToString(),
-						parseMode: ParseMode.Html
-				);
 
 				_logger.LogDebug($"Done: {NotifierString.debugTelegramSendMessage}");
 			} catch (Exception) {

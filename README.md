@@ -28,11 +28,13 @@ Fill your Telegram Bot token and chat ID in config.json
 }
 ```
 
-Check [wiki](https://github.com/azhuge233/SteamDB-FreeGames-dotnet/wiki/Config-Description) for more notification method descriptions, note that `NotifyKeepGamesOnly` is not working for this project.
+Check [wiki](https://github.com/azhuge233/SteamDB-FreeGames-dotnet/wiki/Config-Description) for more notification method descriptions, note that `NotifyKeepGamesOnly` and any ASF related variables are not working for this project.
 
-To schedule the program, use cron.d in Linux(macOS) or Task Scheduler in Windows.
+### Repeatedly running
 
-Tested on Windows Server 2022.
+The program will not add while/for loop, it's a scraper. To schedule the program, use cron.d in Linux(macOS) or Task Scheduler in Windows.
+
+Tested on Windows Server 2019/2022.
 
 ## My Free Games Collection
 

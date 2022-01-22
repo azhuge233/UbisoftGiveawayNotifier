@@ -1,5 +1,5 @@
 # UbisoftGiveawayNotifier
-A CLI tool fetches free games info from Ubisoft giveaway page, sends notifications through Telegram, Email, Bark, QQ, PushPlus and DingTalk.
+A CLI tool fetches free games info from Ubisoft giveaway page, sends notifications through Telegram, Email, Bark, QQ, PushPlus, DingTalk and PushDeer.
 
 Currently I'm not able to find a workable source to get Ubisoft giveaways which only available in certain regions (like the Splinter's cell Double Agent giveaway is Japan only), so the program will not send notifications for any region-specific giveaways.
 

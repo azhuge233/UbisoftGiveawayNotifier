@@ -66,6 +66,12 @@ namespace UbisoftGiveawayNotifier.Services {
 						throw new Exception(message: "No DingTalk token provided!");
 				}
 
+				//PushDeer
+				if (config.EnablePushDeer) {
+					if (string.IsNullOrEmpty(config.PushDeerToken))
+						throw new Exception(message: "No PushDeer token provided!");
+				}
+
 				_logger.LogDebug($"Done: {ConfigValidatorString.debugCheckValid}");
 			} catch (Exception) {
 				_logger.LogError($"Error: {ConfigValidatorString.debugCheckValid}");

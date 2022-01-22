@@ -35,5 +35,9 @@ namespace UbisoftGiveawayNotifier.Models.Record {
 		internal string ToQQMessage() {
 			return new StringBuilder().AppendFormat(NotifyFormatString.qqPushFormat, Name, Url).ToString();
 		}
+
+		internal string ToPushDeerMessage() {
+			return new StringBuilder().AppendFormat(NotifyFormatString.pushDeerFormat, Name, Url).ToString();
+		}
 	}
 }

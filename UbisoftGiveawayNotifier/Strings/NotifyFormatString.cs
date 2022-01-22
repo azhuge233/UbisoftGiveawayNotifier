@@ -1,6 +1,6 @@
 ﻿namespace UbisoftGiveawayNotifier.Strings {
 	internal class NotifyFormatString {
-		#region record ToMessage(update = false) string
+		#region record string
 		internal const string telegramPushFormat = 
 			"<b>Ubisoft +1</b>\n\n" + 
 			"<b>{0}</b>\n" + 
@@ -20,6 +20,10 @@
 			"<p><b>{0}</b><br>" +
 			"链接: <a href=\"{1}\" > {0}</a><br>";
 		internal const string dingTalkPushFormat =
+			imTitle +
+			"{0}\n" +
+			"链接: {1}";
+		internal const string pushDeerFormat =
 			imTitle +
 			"{0}\n" +
 			"链接: {1}";
@@ -46,6 +50,8 @@
 		internal const string pushPlusUrlFormat = "http://www.pushplus.plus/send?token={0}&template=html&title={1}&content=";
 
 		internal const string dingTalkUrlFormat = "https://oapi.dingtalk.com/robot/send?access_token={0}";
+
+		internal const string pushDeerUrlFormat = "https://api2.pushdeer.com/message/push?pushkey={0}&&text={1}";
 		#endregion
 
 

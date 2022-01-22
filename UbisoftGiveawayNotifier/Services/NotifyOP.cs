@@ -7,7 +7,7 @@ using UbisoftGiveawayNotifier.Strings;
 using UbisoftGiveawayNotifier.Services.Notifier;
 
 namespace UbisoftGiveawayNotifier.Services {
-	internal class NotifyOP {
+	internal class NotifyOP: IDisposable {
 		private readonly ILogger<NotifyOP> _logger;
 		private readonly IServiceProvider services = DI.BuildDiNotifierOnly();
 
@@ -53,6 +53,12 @@ namespace UbisoftGiveawayNotifier.Services {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "DingTalk");
 						await services.GetRequiredService<DingTalk>().SendMessage(config, pushList);
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "DingTalk");
+
+					// PushDeer notifications
+					if (config.EnablePushDeer) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "PushDeer");
+						await services.GetRequiredService<PushDeer>().SendMessage(config, pushList);
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "PushDeer");
 
 					// Email notifications
 					if (config.EnableEmail) {

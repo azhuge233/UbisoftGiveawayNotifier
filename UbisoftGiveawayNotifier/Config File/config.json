@@ -26,6 +26,9 @@
   "EnableDingTalk": false,
   "DingTalkBotToken": "",
 
+  "EnablePushDeer": false,
+  "PushDeerToken": "",
+
   "EnableHeadless": true,
   "NotifyKeepGamesOnly": true,
   "TimeOutMilliSecond": 30000

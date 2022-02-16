@@ -1,7 +1,7 @@
 ﻿namespace UbisoftGiveawayNotifier.Models {
 	internal class Content {
 #pragma warning disable IDE1006
-		public string? content { get; set; }
+		public string content { get; set; }
 #pragma warning restore IDE1006
 	}
 	internal class DingTalkPostContent {

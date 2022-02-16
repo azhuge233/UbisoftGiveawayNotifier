@@ -4,11 +4,11 @@ using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Models.Record {
 	public class FreeGameRecord {
-		public string? Url { get; set; }
+		public string Url { get; set; }
 
-		public string? Name { get; set; }
+		public string Name { get; set; }
 
-		private static string RemoveSpecialCharacters(string? str) {
+		private static string RemoveSpecialCharacters(string str) {
 			if (str == null) return string.Empty;
 			return Regex.Replace(str, ParseString.removeSpecialCharsRegex, string.Empty);
 		}

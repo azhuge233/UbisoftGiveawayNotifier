@@ -25,5 +25,9 @@
 		#region DingTalk debug strings
 		internal const string debugDingTalkSendMessage = "Send notifications to DingTalk";
 		#endregion
+
+		#region PushDeer debug strings
+		internal const string debugPushDeerSendMessage = "Send notifications to PushDeer";
+		#endregion
 	}
 }

@@ -10,22 +10,18 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 	internal class PushDeer: INotifiable {
 		private readonly ILogger<PushDeer> _logger;
 
-		#region debug strings
-		private readonly string debugSendMessage = "Send notification to PushDeer";
-		#endregion
-
 		public PushDeer(ILogger<PushDeer> logger) {
 			_logger = logger;
 		}
 
 		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
 			try {
-				_logger.LogDebug(debugSendMessage);
+				_logger.LogDebug(NotifierString.debugPushDeerSendMessage);
 				var webGet = new HtmlWeb();
 				var resp = new HtmlDocument();
 
 				foreach (var record in records) {
-					_logger.LogDebug($"{debugSendMessage} : {record.Name}");
+					_logger.LogDebug($"{NotifierString.debugPushDeerSendMessage} : {record.Name}");
 					resp = await webGet.LoadFromWebAsync(
 						new StringBuilder()
 						.AppendFormat(NotifyFormatString.pushDeerUrlFormat,
@@ -37,9 +33,9 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 					_logger.LogDebug(resp.Text);
 				}
 
-				_logger.LogDebug($"Done: {debugSendMessage}");
+				_logger.LogDebug($"Done: {NotifierString.debugPushDeerSendMessage}");
 			} catch (Exception) {
-				_logger.LogError($"Error: {debugSendMessage}");
+				_logger.LogError($"Error: {NotifierString.debugPushDeerSendMessage}");
 				throw;
 			} finally {
 				Dispose();

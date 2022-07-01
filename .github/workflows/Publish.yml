@@ -1,5 +1,8 @@
 name: Publish
 
+env:
+  SOURCE_PATH: ${{ GITHUB_ACTION_PATH }}\UbisoftGiveawayNotifier
+
 on:
   push:
     branches: [ master ]
@@ -21,14 +24,16 @@ jobs:
         dotnet-version: 6.0.x
     
     - name: Publish
+      shell: pwsh
       run: |
         dotnet build
         dotnet publish -c release -r win-x64 -o bin\Release\win-x64 --sc
-        Copy-Item -Recurse bin\Debug\net6.0\.playwright bin\Release\win-x64\
+        Copy-Item -Recurse $SOURCE_PATH\bin\Debug\net6.0\.playwright $SOURCE_PATH\bin\Release\win-x64\
       
     - name: Create Zip
+      shell: pwsh
       run: |
-        Compress-Archive -Path bin\Release\win-x64\ -DestinationPath bin\win-x64.zip 
+        Compress-Archive -Path $SOURCE_PATH\bin\Release\win-x64\ -DestinationPath $SOURCE_PATH\bin\win-x64.zip 
       
     - name: Upload zip
       uses: actions/upload-artifact@v3

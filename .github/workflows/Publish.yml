@@ -7,7 +7,7 @@ on:
 jobs:
   publish:
     name: Publish the app
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
@@ -22,8 +22,9 @@ jobs:
     
     - name: Publish
       run: |
-        dotnet restore
+        dotnet build
         dotnet publish -c release -r win-x64 -o bin/release/win-x64 -p:PlaywrightPlatform=win --sc
+        cp -ri bin/Debug/net6.0/.playwright bin/release/win-x64/
       
     - name: Install Zip
       uses: montudor/action-zip@v1

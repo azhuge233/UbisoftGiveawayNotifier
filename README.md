@@ -3,11 +3,8 @@ A CLI tool fetches free games info from Ubisoft giveaway page, sends notificatio
 
 Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
 
-```
-Currently I'm not able to find a proper source to get Ubisoft giveaways that only available in certain regions (like the Splinter's cell Double Agent giveaway is Japan only), so the program will not send notifications for any region-specific giveaways.
-
-If you have any idea how to get the source, tell me by creating issues.
-```
+> Currently I'm not able to find a proper source to get Ubisoft giveaways that only available in certain regions (like the Splinter's cell Double Agent giveaway is Japan only), so the program will not send notifications for any region-specific giveaways.
+> If you have any idea how to get the source, tell me by creating issues.
 
 ## Build
 

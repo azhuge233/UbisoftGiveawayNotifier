@@ -14,7 +14,7 @@ namespace UbisoftGiveawayNotifier.Models.PostContent {
 		[JsonProperty("description")]
 		public string Description { get; set; }
 		[JsonProperty("color")]
-		public int Color { get; set; } = 16711856;
+		public int Color { get; set; } = 16777215;
 		[JsonProperty("footer")]
 		public Footer Footer { get; set; }
 	}

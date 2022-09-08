@@ -72,6 +72,12 @@ namespace UbisoftGiveawayNotifier.Services {
 						throw new Exception(message: "No PushDeer token provided!");
 				}
 
+				//Discord
+				if (config.EnableDiscord) {
+					if (string.IsNullOrEmpty(config.DiscordWebhookURL))
+						throw new Exception(message: "No Discord Webhook provided!");
+				}
+
 				_logger.LogDebug($"Done: {ConfigValidatorString.debugCheckValid}");
 			} catch (Exception) {
 				_logger.LogError($"Error: {ConfigValidatorString.debugCheckValid}");

@@ -5,6 +5,7 @@ using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 using UbisoftGiveawayNotifier.Services.Notifier;
+using UbisoftGiveawayNotifier.Notifier;
 
 namespace UbisoftGiveawayNotifier.Services {
 	internal class NotifyOP: IDisposable {
@@ -59,6 +60,12 @@ namespace UbisoftGiveawayNotifier.Services {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "PushDeer");
 						await services.GetRequiredService<PushDeer>().SendMessage(config, pushList);
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "PushDeer");
+
+					// Discord notifications
+					if (config.EnableDiscord) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "Discord");
+						await services.GetRequiredService<Discord>().SendMessage(config, pushList);
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "Discord");
 
 					// Email notifications
 					if (config.EnableEmail) {

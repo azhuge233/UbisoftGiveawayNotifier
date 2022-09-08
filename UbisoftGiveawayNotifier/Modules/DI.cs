@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using UbisoftGiveawayNotifier.Notifier;
 using UbisoftGiveawayNotifier.Services;
 using UbisoftGiveawayNotifier.Services.Notifier;
 
@@ -25,7 +26,8 @@ namespace UbisoftGiveawayNotifier.Modules {
                .AddTransient<PushPlus>()
                .AddTransient<DingTalk>()
                .AddTransient<PushDeer>()
-               .AddLogging(loggingBuilder => {
+			   .AddTransient<Discord>()
+			   .AddLogging(loggingBuilder => {
                    // configure Logging with NLog
                    loggingBuilder.ClearProviders();
                    loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
@@ -43,7 +45,8 @@ namespace UbisoftGiveawayNotifier.Modules {
                .AddTransient<PushPlus>()
                .AddTransient<DingTalk>()
                .AddTransient<PushDeer>()
-               .AddLogging(loggingBuilder => {
+			   .AddTransient<Discord>()
+			   .AddLogging(loggingBuilder => {
                    // configure Logging with NLog
                    loggingBuilder.ClearProviders();
                    loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);

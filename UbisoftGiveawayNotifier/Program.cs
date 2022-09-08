@@ -22,7 +22,7 @@ namespace UbisoftGiveawayNotifier {
 
                     // Get page source
                     var source = await servicesProvider.GetRequiredService<Scraper>().GetUbisoftSource(config);
-                    //var source = System.IO.File.ReadAllText("test.html");
+                    //var source = File.ReadAllText("test.html");
 
                     // Parse page source
                     var parseResult = servicesProvider.GetRequiredService<Parser>().Parse(source, oldRecord);

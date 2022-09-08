@@ -27,6 +27,8 @@
 			imTitle +
 			"{0}\n" +
 			"链接: {1}";
+		internal const string discordFormat =
+			"链接: {0}";
 		#endregion
 
 

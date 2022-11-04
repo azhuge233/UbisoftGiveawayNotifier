@@ -9,7 +9,7 @@ namespace UbisoftGiveawayNotifier.Services {
 
 		public Scraper(ILogger<Scraper> logger) { 
 			_logger = logger;
-			Microsoft.Playwright.Program.Main(new string[] { "install", "webkit" });
+			Microsoft.Playwright.Program.Main(new string[] { "install", "firefox" });
 		}
 
 		public async Task<string> GetUbisoftSource(Config config) {
@@ -17,7 +17,7 @@ namespace UbisoftGiveawayNotifier.Services {
 				_logger.LogDebug($"{ScrapeString.debugGetubisoftSource}");
 
 				using var playwright = await Playwright.CreateAsync();
-				await using var browser = await playwright.Webkit.LaunchAsync(new() { Headless = config.EnableHeadless });
+				await using var browser = await playwright.Firefox.LaunchAsync(new() { Headless = false });
 
 				var context = await browser.NewContextAsync();
 				await context.AddCookiesAsync(new[] {
@@ -34,7 +34,6 @@ namespace UbisoftGiveawayNotifier.Services {
 				var page = await context.NewPageAsync();
 				page.SetDefaultTimeout(config.TimeOutMilliSecond);
 				page.SetDefaultNavigationTimeout(config.TimeOutMilliSecond);
-
 
 				await page.GotoAsync(ScrapeString.UbisoftGiveawayPageUrl);
 				await page.WaitForSelectorAsync("div.free-event");

@@ -17,7 +17,7 @@ namespace UbisoftGiveawayNotifier.Services {
 				_logger.LogDebug($"{ScrapeString.debugGetubisoftSource}");
 
 				using var playwright = await Playwright.CreateAsync();
-				await using var browser = await playwright.Firefox.LaunchAsync(new() { Headless = false });
+				await using var browser = await playwright.Firefox.LaunchAsync(new() { Headless = config.EnableHeadless });
 
 				var context = await browser.NewContextAsync();
 				await context.AddCookiesAsync(new[] {

@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-	<RootNamespace>UbisoftGiveawayNotifier</RootNamespace>
-	<RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
+    <TargetFramework>net7.0</TargetFramework>
+	  <RootNamespace>UbisoftGiveawayNotifier</RootNamespace>
+	  <RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 

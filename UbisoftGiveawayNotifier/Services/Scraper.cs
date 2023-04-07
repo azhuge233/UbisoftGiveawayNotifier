@@ -34,6 +34,11 @@ namespace UbisoftGiveawayNotifier.Services {
 				var page = await context.NewPageAsync();
 				page.SetDefaultTimeout(config.TimeOutMilliSecond);
 				page.SetDefaultNavigationTimeout(config.TimeOutMilliSecond);
+				await page.RouteAsync("**/*", async route => {
+					var blockList = new List<string> { "stylesheet", "image", "font" };
+					if (blockList.Contains(route.Request.ResourceType)) await route.AbortAsync();
+					else await route.ContinueAsync();
+				});
 
 				await page.GotoAsync(ScrapeString.UbisoftGiveawayPageUrl);
 				await page.WaitForSelectorAsync("div.free-event");

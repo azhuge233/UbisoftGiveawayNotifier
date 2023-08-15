@@ -13,7 +13,7 @@ Install dotnet 7.0 SDK first, you can find installation packages/guides [here](h
 ### Publish
 
 ```
-dotnet publish -c Release -o /your/path/here -r [win10-x64/osx-x64/linux-x64] --sc
+dotnet publish -c Release -p:PublishDir=/your/path/here -r [win10-x64/osx-x64/linux-x64] --sc
 ```
 
 ## Usage

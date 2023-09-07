@@ -8,4 +8,13 @@ updates:
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    groups:
+      Playwright:
+        patterns:
+          - "Microsoft.Playwright"
+      Others:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "Microsoft.Playwright"

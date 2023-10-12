@@ -46,6 +46,9 @@
 		internal const string emailBodyFormat = "<br>{0}";
 
 		internal const string qqUrlFormat = "http://{0}:{1}/send_private_msg?user_id={2}&message=";
+		internal const string qqRedUrlFormat = "ws://{0}:{1}";
+		internal const string qqRedWSConnectPacketType = "meta::connect";
+		internal const string qqRedWSSendPacketType = "message::send";
 
 		internal const string pushPlusTitleFormat = "{0} new free game(s) - UbisoftGiveawayNotifier";
 		internal const string pushPlusBodyFormat = "<br>{0}";

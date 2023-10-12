@@ -43,6 +43,12 @@ namespace UbisoftGiveawayNotifier.Services {
 						await services.GetRequiredService<QQPusher>().SendMessage(config, pushList);
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ");
 
+					//QQ Red (Chronocat) notifications
+					if (config.EnableRed) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ Red (Chronocat)");
+						await services.GetRequiredService<QQRed>().SendMessage(config, pushList);
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ Red (Chronocat)");
+
 					// PushPlus notifications
 					if (config.EnablePushPlus) {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "PushPlus");

@@ -5,6 +5,8 @@
     <TargetFramework>net7.0</TargetFramework>
 	  <RootNamespace>UbisoftGiveawayNotifier</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+		<DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>

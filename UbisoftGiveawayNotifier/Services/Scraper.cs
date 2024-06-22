@@ -35,7 +35,7 @@ namespace UbisoftGiveawayNotifier.Services {
 				page.SetDefaultTimeout(config.TimeOutMilliSecond);
 				page.SetDefaultNavigationTimeout(config.TimeOutMilliSecond);
 				await page.RouteAsync("**/*", async route => {
-					var blockList = new List<string> { "stylesheet", "image", "font" };
+					var blockList = new List<string> { "image", "font" };
 					if (blockList.Contains(route.Request.ResourceType)) await route.AbortAsync();
 					else await route.ContinueAsync();
 				});

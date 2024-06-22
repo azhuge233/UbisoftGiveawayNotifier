@@ -5,8 +5,9 @@
 		#endregion
 
 		#region Urls
-		internal const string UbisoftGiveawayPageUrl = "https://free.ubisoft.com/";
-		internal const string UbisoftStoreGiveawayUrl = "https://store.ubi.com/ca/free-pc-games/#cgid=free-offers&prefn1=freeOfferProductType&prefv1=Giveaway";
+		internal const string UbisoftGiveawayPageUrl = "https://www.ubisoft.com/en-us/games/free";
+		// internal const string UbisoftGiveawayPageUrl = "https://free.ubisoft.com/";
+		// internal const string UbisoftStoreGiveawayUrl = "https://store.ubi.com/ca/free-pc-games/#cgid=free-offers&prefn1=freeOfferProductType&prefv1=Giveaway";
 		#endregion
 
 		#region Cookie names

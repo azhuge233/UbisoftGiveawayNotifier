@@ -9,7 +9,7 @@ namespace UbisoftGiveawayNotifier.Services {
 
 		public Scraper(ILogger<Scraper> logger) { 
 			_logger = logger;
-			Microsoft.Playwright.Program.Main(new string[] { "install", "firefox" });
+			Microsoft.Playwright.Program.Main(["install", "firefox"]);
 		}
 
 		public async Task<string> GetUbisoftSource(Config config) {
@@ -20,7 +20,7 @@ namespace UbisoftGiveawayNotifier.Services {
 				await using var browser = await playwright.Firefox.LaunchAsync(new() { Headless = config.EnableHeadless });
 
 				var context = await browser.NewContextAsync();
-				await context.AddCookiesAsync(new[] {
+				await context.AddCookiesAsync([
 					new Cookie() { Name = ScrapeString.bool_UBI_PRIVACY_POLICY_ACCEPTED, Value = ScrapeString.boolCookieValue, Domain = ScrapeString.giveawayCookieDomain, Path = ScrapeString.cookiePath},
 					new Cookie() { Name = ScrapeString.bool_UBI_PRIVACY_POLICY_VIEWED, Value = ScrapeString.boolCookieValue, Domain = ScrapeString.giveawayCookieDomain, Path = ScrapeString.cookiePath},
 					// Below cookies are for CA store page store.ubi.com, diabled
@@ -29,7 +29,7 @@ namespace UbisoftGiveawayNotifier.Services {
 					//new Cookie() { Name = ScrapeString.int_dw_dnt, Value = ScrapeString.intCookieValue, Domain = ScrapeString.storeCookieDomain, Path = ScrapeString.cookiePath},
 					//new Cookie() { Name = ScrapeString.bool_geopopup_ca, Value = ScrapeString.boolCookieValue, Domain = ScrapeString.storeCookieDomain, Path = ScrapeString.cookiePath},
 					//new Cookie() { Name = ScrapeString.string_prefCountry, Value = ScrapeString.countryCookieValue, Domain = ScrapeString.storeCookieDomain, Path = ScrapeString.cookiePath}
-				});
+				]);
 
 				var page = await context.NewPageAsync();
 				page.SetDefaultTimeout(config.TimeOutMilliSecond);

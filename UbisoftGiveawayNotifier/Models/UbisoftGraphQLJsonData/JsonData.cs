@@ -1,6 +1,11 @@
 ﻿using Newtonsoft.Json;
 
 namespace UbisoftGiveawayNotifier.Models.UbisoftGraphQLJsonData {
+	public class JsonData {
+		[JsonProperty("data")]
+		public Data Data { get; set; }
+	}
+
 	public class Data {
 		[JsonProperty("promoMaster")]
 		public PromoMaster PromoMaster { get; set; }

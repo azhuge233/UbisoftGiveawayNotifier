@@ -1,5 +1,4 @@
-﻿// using Microsoft.Playwright;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services {

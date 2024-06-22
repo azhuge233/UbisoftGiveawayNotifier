@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using NLog;
 using UbisoftGiveawayNotifier.Modules;
 using UbisoftGiveawayNotifier.Services;
@@ -21,7 +22,7 @@ namespace UbisoftGiveawayNotifier {
                     servicesProvider.GetRequiredService<ConfigValidator>().CheckValid(config);
 
                     // Get page source
-                    var source = await servicesProvider.GetRequiredService<Scraper>().GetUbisoftSource(config);
+                    var source = await servicesProvider.GetRequiredService<Scraper>().GetUbisoftSource();
                     //var source = File.ReadAllText("test.html");
 
                     // Parse page source

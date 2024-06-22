@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using NLog;
 using UbisoftGiveawayNotifier.Modules;
 using UbisoftGiveawayNotifier.Services;

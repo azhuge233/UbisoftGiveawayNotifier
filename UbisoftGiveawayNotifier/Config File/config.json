@@ -36,8 +36,5 @@
   "PushDeerToken": "",
 
   "EnableDiscord": false,
-  "DiscordWebhookURL": "",
-
-  "EnableHeadless": true,
-  "TimeOutMilliSecond": 30000
+  "DiscordWebhookURL": ""
 }

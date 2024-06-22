@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Web;
 using Microsoft.Extensions.Logging;
-using HtmlAgilityPack;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
@@ -9,6 +8,8 @@ using UbisoftGiveawayNotifier.Strings;
 namespace UbisoftGiveawayNotifier.Services.Notifier {
 	internal class Barker: INotifiable {
 		private readonly ILogger<Barker> _logger;
+
+		private HttpClient Client { get; set; } = new HttpClient();
 
 		public Barker(ILogger<Barker> logger) {
 			_logger = logger;
@@ -18,12 +19,10 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			try {
 				var sb = new StringBuilder();
 				string url = new StringBuilder().AppendFormat(NotifyFormatString.barkUrlFormat, config.BarkAddress, config.BarkToken).ToString();
-				var webGet = new HtmlWeb();
-				var resp = new HtmlDocument();
 
 				foreach (var record in records) {
 					_logger.LogDebug($"{NotifierString.debugBarkerSendMessage} : {record.Name}");
-					resp = await webGet.LoadFromWebAsync(
+					var resp = await Client.GetAsync(
 						new StringBuilder()
 							.Append(url)
 							.Append(NotifyFormatString.barkUrlTitle)
@@ -32,7 +31,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 							.Append(NotifyFormatString.barkUrlArgs)
 							.ToString()
 					);
-					_logger.LogDebug(resp.Text);
+					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
 				}
 
 				_logger.LogDebug($"Done: {NotifierString.debugBarkerSendMessage}");

@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Web;
 using Microsoft.Extensions.Logging;
-using HtmlAgilityPack;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
@@ -9,6 +8,8 @@ using UbisoftGiveawayNotifier.Strings;
 namespace UbisoftGiveawayNotifier.Services.Notifier {
 	internal class PushPlus: INotifiable {
 		private readonly ILogger<PushPlus> _logger;
+
+		private HttpClient Client { get; set; } = new HttpClient();
 
 		public PushPlus(ILogger<PushPlus> logger) {
 			_logger = logger;
@@ -42,13 +43,13 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 				var url = new StringBuilder().AppendFormat(NotifyFormatString.pushPlusUrlFormat, config.PushPlusToken, title);
 				var message = CreateMessage(records);
 
-				var resp = await new HtmlWeb().LoadFromWebAsync(
+				var resp = await Client.GetAsync(
 					new StringBuilder()
 						.Append(url)
 						.Append(message)
 						.ToString()
 				);
-				_logger.LogDebug(resp.Text);
+				_logger.LogDebug(await resp.Content.ReadAsStringAsync());
 
 				_logger.LogDebug($"Done: {NotifierString.debugPushPlusSendMessage}");
 			} catch (Exception) {

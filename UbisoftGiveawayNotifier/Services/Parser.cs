@@ -25,7 +25,10 @@ namespace UbisoftGiveawayNotifier.Services {
 
 				if (data != null && !data.Data.PromoMaster.Item.Title.Contains(ParseString.NoPromotionTitle)) {
 					string gameName = data.Data.PromoMaster.Item.Title;
-					string gameUrl = data.Data.PromoMaster.Item.Content; // Needs update
+					string gameUrl = data.Data.PromoMaster.Item.Content;
+
+					if (data.Data.PromoMaster.Item.ButtonsMaster.Items.First() != null)
+						gameUrl = data.Data.PromoMaster.Item.ButtonsMaster.Items.First().LocalizedItems.ButtonUrl;
 
 					_logger.LogInformation(ParseString.infoGameFound, gameName);
 

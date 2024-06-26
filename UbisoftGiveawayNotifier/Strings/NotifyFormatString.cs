@@ -2,7 +2,7 @@
 	internal class NotifyFormatString {
 		#region record string
 		internal const string telegramPushFormat = 
-			"<b>Ubisoft +1</b>\n\n" + 
+			"<b>Ubisoft</b>\n\n" + 
 			"<b>{0}</b>\n" + 
 			"链接: <a href=\"{1}\" > {0}</a>\n\n" + 
 			"#Ubisoft #{2}";
@@ -33,7 +33,7 @@
 
 
 		#region url, title format string
-		internal const string imTitle = "Ubisoft +1\n\n";
+		internal const string imTitle = "Ubisoft\n\n";
 
 		internal const string barkUrlFormat = "{0}/{1}/";
 		internal const string barkUrlTitle = "UbisoftGiveawayNotifier/";

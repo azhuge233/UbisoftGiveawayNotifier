@@ -4,31 +4,31 @@
 		internal const string telegramPushFormat = 
 			"<b>Ubisoft</b>\n\n" + 
 			"<b>{0}</b>\n" + 
-			"链接: <a href=\"{1}\" > {0}</a>\n\n" + 
+			"Link: <a href=\"{1}\" > {0}</a>\n\n" + 
 			"#Ubisoft #{2}";
 		internal const string barkPushFormat =
 			"{0}\n" +
-			"链接: {1}";
+			"Link: {1}";
 		internal const string emailPushHtmlFormat =
 			"<p><b>{0}</b><br>" +
-			"链接: <a href=\"{1}\" > {0}</a><br>";
+			"Link: <a href=\"{1}\" > {0}</a><br>";
 		internal const string qqPushFormat =
 			imTitle +
 			"{0}\n" +
-			"链接: {1}";
+			"Link: {1}";
 		internal const string pushPlusPushHtmlFormat =
 			"<p><b>{0}</b><br>" +
-			"链接: <a href=\"{1}\" > {0}</a><br>";
+			"Link: <a href=\"{1}\" > {0}</a><br>";
 		internal const string dingTalkPushFormat =
 			imTitle +
 			"{0}\n" +
-			"链接: {1}";
+			"Link: {1}";
 		internal const string pushDeerFormat =
 			imTitle +
 			"{0}\n" +
-			"链接: {1}";
+			"Link: {1}";
 		internal const string discordFormat =
-			"链接: {0}";
+			"Link: {0}";
 		#endregion
 
 

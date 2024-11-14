@@ -29,6 +29,20 @@ jobs:
       run: |
         Set-Location "$env:GITHUB_WORKSPACE"
         dotnet publish -c release -r win-x64 -p:PublishDir="$env:GITHUB_WORKSPACE\Release\win-x64" --sc --nologo
+        
+    - name: Delete unessesary file
+      shell: pwsh
+      run: |
+        Set-Location "$env:GITHUB_WORKSPACE"
+        $DeleteFile = "$GITHUB_WORKSPACE/bin/release/win-x64/aspnetcorev2_inprocess.dll"
+        if (Test-Path $DeleteFile) {
+           Remove-Item $DeleteFile -verbose
+        }
+        
+    - name: Create zip
+      shell: pwsh
+      run: |
+        Set-Location "$env:GITHUB_WORKSPACE"
         Compress-Archive -Path "$env:GITHUB_WORKSPACE\Release\win-x64\" -DestinationPath "Ubi-win-x64.zip"
         
     - name: Create Release

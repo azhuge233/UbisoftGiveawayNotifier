@@ -34,7 +34,7 @@ jobs:
       shell: pwsh
       run: |
         Set-Location "$env:GITHUB_WORKSPACE"
-        $DeleteFile = "$GITHUB_WORKSPACE/bin/release/win-x64/aspnetcorev2_inprocess.dll"
+        $DeleteFile = "$env:GITHUB_WORKSPACE\Release\win-x64\aspnetcorev2_inprocess.dll"
         if (Test-Path $DeleteFile) {
            Remove-Item $DeleteFile -verbose
         }

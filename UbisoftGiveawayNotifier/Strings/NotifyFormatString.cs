@@ -29,8 +29,10 @@
 			"Link: {1}";
 		internal const string discordPushFormat =
 			"Link: {0}";
+		internal const string meowPushFormat =
+			"{0}\n" +
+			"Link: {1}";
 		#endregion
-
 
 		#region url, title format string
 		internal const string imTitle = "Ubisoft\n\n";
@@ -57,8 +59,10 @@
 		internal const string dingTalkUrlFormat = "https://oapi.dingtalk.com/robot/send?access_token={0}";
 
 		internal const string pushDeerUrlFormat = "https://api2.pushdeer.com/message/push?pushkey={0}&&text={1}";
-		#endregion
 
+		internal const string meowUrlFormat = "{0}/{1}";
+		internal const string meowUrlTitle = "UbisoftGiveawayNotifier";
+		#endregion
 
 		internal const string projectLink = "\n\nFrom https://github.com/azhuge233/UbisoftGiveawayNotifier";
 		internal const string projectLinkHTML = "<br><br>From <a href=\"https://github.com/azhuge233/UbisoftGiveawayNotifier\">UbisoftGiveawayNotifier</a>";

@@ -81,6 +81,12 @@ namespace UbisoftGiveawayNotifier.Services {
 						notifyTasks.Add(services.GetRequiredService<Email>().SendMessage(config, pushList));
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "Email");
 
+					// Meow notifications
+					if (config.EnableMeow) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "Meow");
+						notifyTasks.Add(services.GetRequiredService<Meow>().SendMessage(config, pushList));
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "Meow");
+
 					await Task.WhenAll(notifyTasks);
 				}
 

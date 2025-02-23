@@ -90,6 +90,14 @@ namespace UbisoftGiveawayNotifier.Services {
 						throw new Exception(message: "No Discord Webhook provided!");
 				}
 
+				//Meow
+				if (config.EnableMeow) {
+					if (string.IsNullOrEmpty(config.MeowAddress))
+						throw new Exception(message: "No Meow address provided!");
+					if (string.IsNullOrEmpty(config.MeowNickname))
+						throw new Exception(message: "No Meow nickname provided!");
+				}
+
 				_logger.LogDebug($"Done: {ConfigValidatorString.debugCheckValid}");
 			} catch (Exception) {
 				_logger.LogError($"Error: {ConfigValidatorString.debugCheckValid}");

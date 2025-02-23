@@ -43,5 +43,9 @@ namespace UbisoftGiveawayNotifier.Models.Record {
 		internal string ToDiscordMessage() {
 			return new StringBuilder().AppendFormat(NotifyFormatString.discordPushFormat, Url).ToString();
 		}
+
+		internal string ToMeowMessage() {
+			return new StringBuilder().AppendFormat(NotifyFormatString.meowPushFormat, Name, Url).ToString();
+		}
 	}
 }

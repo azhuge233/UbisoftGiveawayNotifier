@@ -29,5 +29,9 @@
 		#region PushDeer debug strings
 		internal const string debugPushDeerSendMessage = "Send notifications to PushDeer";
 		#endregion
+
+		#region Meow debug strings
+		internal const string debugMeowSendMessage = "Send notification to Meow";
+		#endregion
 	}
 }

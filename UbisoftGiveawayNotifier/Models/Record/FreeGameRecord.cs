@@ -37,11 +37,11 @@ namespace UbisoftGiveawayNotifier.Models.Record {
 		}
 
 		internal string ToPushDeerMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.pushDeerFormat, Name, Url).ToString();
+			return new StringBuilder().AppendFormat(NotifyFormatString.pushDeerPushFormat, Name, Url).ToString();
 		}
 
 		internal string ToDiscordMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.discordFormat, Url).ToString();
+			return new StringBuilder().AppendFormat(NotifyFormatString.discordPushFormat, Url).ToString();
 		}
 	}
 }

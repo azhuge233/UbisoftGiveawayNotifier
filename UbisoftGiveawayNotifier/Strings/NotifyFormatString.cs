@@ -23,11 +23,11 @@
 			imTitle +
 			"{0}\n" +
 			"Link: {1}";
-		internal const string pushDeerFormat =
+		internal const string pushDeerPushFormat =
 			imTitle +
 			"{0}\n" +
 			"Link: {1}";
-		internal const string discordFormat =
+		internal const string discordPushFormat =
 			"Link: {0}";
 		#endregion
 

@@ -8,8 +8,15 @@
 		internal const string debugBarkerSendMessage = "Send notification to Bark";
 		#endregion
 
-		#region QQPusher debug strings
-		internal const string debugQQPusherSendMessage = "Send notifications to QQ";
+		#region QQHttp debug strings
+		internal const string debugQQPusherSendMessage = "Send notifications to QQ Http";
+		#endregion
+
+		#region QQWebSocket debug strings
+		internal const string debugSendMessage = "Send notifications to QQ WebSocket";
+		internal const string debugWSReconnection = "Reconnection happened, type: {0}";
+		internal const string debugWSMessageRecieved = "Message received: {0}";
+		internal const string debugWSDisconnected = "Disconnected: {0}";
 		#endregion
 
 		#region PushPlus debug strings

@@ -11,14 +11,6 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 	internal class QQWebSocket : INotifiable {
 		private readonly ILogger<QQWebSocket> _logger;
 
-		#region debug strings
-		private readonly string debugSendMessage = "Send notifications to QQ Red (Chronocat)";
-		private readonly string debugWSReconnection = "Reconnection happened, type: {0}";
-		private readonly string debugWSMessageRecieved = "Message received: {0}";
-		private readonly string debugWSDisconnected = "Disconnected: {0}";
-
-		#endregion
-
 		public QQWebSocket(ILogger<QQWebSocket> logger) {
 			_logger = logger;
 		}
@@ -28,9 +20,9 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 			#region new websocket client
 			var client = new WebsocketClient(url);
-			client.ReconnectionHappened.Subscribe(info => _logger.LogDebug(debugWSReconnection, info.Type));
-			client.MessageReceived.Subscribe(msg => _logger.LogDebug(debugWSMessageRecieved, msg));
-			client.DisconnectionHappened.Subscribe(msg => _logger.LogDebug(debugWSDisconnected, msg));
+			client.ReconnectionHappened.Subscribe(info => _logger.LogDebug(NotifierString.debugWSReconnection, info.Type));
+			client.MessageReceived.Subscribe(msg => _logger.LogDebug(NotifierString.debugWSMessageRecieved, msg));
+			client.DisconnectionHappened.Subscribe(msg => _logger.LogDebug(NotifierString.debugWSDisconnected, msg));
 			#endregion
 
 			return client;
@@ -48,7 +40,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
 			try {
-				_logger.LogDebug(debugSendMessage);
+				_logger.LogDebug(NotifierString.debugSendMessage);
 
 				var packets = GetSendPacket(config, records);
 
@@ -63,9 +55,9 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 				await client.Stop(WebSocketCloseStatus.NormalClosure, string.Empty);
 
-				_logger.LogDebug($"Done: {debugSendMessage}");
+				_logger.LogDebug($"Done: {NotifierString.debugSendMessage}");
 			} catch (Exception) {
-				_logger.LogDebug($"Error: {debugSendMessage}");
+				_logger.LogDebug($"Error: {NotifierString.debugSendMessage}");
 				throw;
 			} finally {
 				Dispose();

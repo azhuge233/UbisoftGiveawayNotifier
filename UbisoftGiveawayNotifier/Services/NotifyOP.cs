@@ -39,13 +39,13 @@ namespace UbisoftGiveawayNotifier.Services {
 						notifyTasks.Add(services.GetRequiredService<Barker>().SendMessage(config, pushList));
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "Bark");
 
-					// QQ notifications
+					// QQ Http notifications
 					if (config.EnableQQHttp) {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ Http");
 						notifyTasks.Add(services.GetRequiredService<QQHttp>().SendMessage(config, pushList));
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ Http");
 
-					//QQ Red (Chronocat) notifications
+					//QQ WebSocket notifications
 					if (config.EnableQQWebSocket) {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ WebSocket");
 						notifyTasks.Add(services.GetRequiredService<QQWebSocket>().SendMessage(config, pushList));

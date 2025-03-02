@@ -40,16 +40,16 @@ namespace UbisoftGiveawayNotifier.Services {
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "Bark");
 
 					// QQ notifications
-					if (config.EnableQQ) {
-						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ");
-						notifyTasks.Add(services.GetRequiredService<QQPusher>().SendMessage(config, pushList));
-					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ");
+					if (config.EnableQQHttp) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ Http");
+						notifyTasks.Add(services.GetRequiredService<QQHttp>().SendMessage(config, pushList));
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ Http");
 
 					//QQ Red (Chronocat) notifications
-					if (config.EnableRed) {
-						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ Red (Chronocat)");
-						notifyTasks.Add(services.GetRequiredService<QQRed>().SendMessage(config, pushList));
-					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ Red (Chronocat)");
+					if (config.EnableQQWebSocket) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "QQ WebSocket");
+						notifyTasks.Add(services.GetRequiredService<QQWebSocket>().SendMessage(config, pushList));
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "QQ WebSocket");
 
 					// PushPlus notifications
 					if (config.EnablePushPlus) {

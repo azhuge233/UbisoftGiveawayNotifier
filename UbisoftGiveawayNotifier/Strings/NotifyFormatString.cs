@@ -47,10 +47,9 @@
 		internal const string emailTitleFormat = "{0} new free game(s) - UbisoftGiveawayNotifier";
 		internal const string emailBodyFormat = "<br>{0}";
 
-		internal const string qqUrlFormat = "http://{0}:{1}/send_private_msg?user_id={2}&message=";
-		internal const string qqRedUrlFormat = "ws://{0}:{1}";
-		internal const string qqRedWSConnectPacketType = "meta::connect";
-		internal const string qqRedWSSendPacketType = "message::send";
+		internal const string qqUrlFormat = "http://{0}:{1}/send_private_msg?access_token={2}";
+		internal const string qqRedUrlFormat = "ws://{0}:{1}/?access_token={2}";
+		internal const string qqWebSocketSendAction = "send_private_msg";
 
 		internal const string pushPlusTitleFormat = "{0} new free game(s) - UbisoftGiveawayNotifier";
 		internal const string pushPlusBodyFormat = "<br>{0}";

@@ -1,17 +1,18 @@
 ﻿using System.Text;
-using System.Web;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using UbisoftGiveawayNotifier.Models.Config;
+using UbisoftGiveawayNotifier.Models.PostContent;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class QQPusher: INotifiable {
-		private readonly ILogger<QQPusher> _logger;	
+	internal class QQHttp: INotifiable {
+		private readonly ILogger<QQHttp> _logger;	
 
 		private HttpClient Client { get; set; }	= new HttpClient();
 
-		public QQPusher(ILogger<QQPusher> logger) {
+		public QQHttp(ILogger<QQHttp> logger) {
 			_logger = logger;
 		}
 
@@ -19,18 +20,25 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			try {
 				_logger.LogDebug(NotifierString.debugQQPusherSendMessage);
 
-				string url = new StringBuilder().AppendFormat(NotifyFormatString.qqUrlFormat, config.QQAddress, config.QQPort, config.ToQQID).ToString();
+				string url = string.Format(NotifyFormatString.qqUrlFormat, config.QQHttpAddress, config.QQHttpPort, config.QQHttpToken);
+
 				var sb = new StringBuilder();
+
+				var content = new QQHttpPostContent {
+					UserID = config.ToQQID
+				};
+
+				var data = new StringContent(string.Empty);
+				var resp = new HttpResponseMessage();
 
 				foreach (var record in records) {
 					_logger.LogDebug($"{NotifierString.debugQQPusherSendMessage} : {record.Name}");
-					var resp = await Client.GetAsync(
-						new StringBuilder()
-							.Append(url)
-							.Append(HttpUtility.UrlEncode(record.ToQQMessage()))
-							.Append(HttpUtility.UrlEncode(NotifyFormatString.projectLink))
-							.ToString()
-					);
+
+					content.Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}";
+
+					data = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+					resp = await Client.PostAsync(url, data);
+
 					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
 				}
 

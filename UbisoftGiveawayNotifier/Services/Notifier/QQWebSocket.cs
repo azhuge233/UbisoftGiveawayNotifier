@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.WebSockets;
-using System.Text;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Models.WebSocketContent;
@@ -9,8 +8,8 @@ using UbisoftGiveawayNotifier.Strings;
 using Websocket.Client;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class QQRed : INotifiable {
-		private readonly ILogger<QQRed> _logger;
+	internal class QQWebSocket : INotifiable {
+		private readonly ILogger<QQWebSocket> _logger;
 
 		#region debug strings
 		private readonly string debugSendMessage = "Send notifications to QQ Red (Chronocat)";
@@ -20,12 +19,12 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 		#endregion
 
-		public QQRed(ILogger<QQRed> logger) {
+		public QQWebSocket(ILogger<QQWebSocket> logger) {
 			_logger = logger;
 		}
 
 		private WebsocketClient GetWSClient(NotifyConfig config) {
-			var url = new Uri(new StringBuilder().AppendFormat(NotifyFormatString.qqRedUrlFormat, config.RedAddress, config.RedPort).ToString());
+			var url = new Uri(string.Format(NotifyFormatString.qqRedUrlFormat, config.QQWebSocketAddress, config.QQWebSocketPort, config.QQWebSocketToken));
 
 			#region new websocket client
 			var client = new WebsocketClient(url);
@@ -37,32 +36,12 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			return client;
 		}
 
-		private static WSPacket GetConnectPacket(NotifyConfig config) {
-			return new WSPacket() {
-				Type = NotifyFormatString.qqRedWSConnectPacketType,
-				Payload = new ConnectPayload() {
-					Token = config.RedToken
-				}
-			};
-		}
-
 		private static List<WSPacket> GetSendPacket(NotifyConfig config, List<FreeGameRecord> records) {
-			return records.Select(record => new WSPacket() {
-				Type = NotifyFormatString.qqRedWSSendPacketType,
-				Payload = new MessagePayload() {
-					Peer = new Peer() {
-						ChatType = 1,
-						PeerUin = config.ToQQID
-					},
-					Elements = new List<object>() {
-						new TextElementRoot() {
-							TextElement = new TextElement() {
-								Content = new StringBuilder().Append(record.ToQQMessage())
-															.Append(NotifyFormatString.projectLink)
-															.ToString()
-							}
-						}
-					}
+			return records.Select(record => new WSPacket {
+				Action = NotifyFormatString.qqWebSocketSendAction,
+				Params = new Param { 
+					UserID = config.ToQQID,
+					Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}"
 				}
 			}).ToList();
 		}
@@ -76,8 +55,6 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 				using var client = GetWSClient(config);
 
 				await client.Start();
-
-				await client.SendInstant(JsonConvert.SerializeObject(GetConnectPacket(config)));
 
 				foreach (var packet in packets) {
 					await client.SendInstant(JsonConvert.SerializeObject(packet));

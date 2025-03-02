@@ -40,7 +40,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
 			try {
-				_logger.LogDebug(NotifierString.debugSendMessage);
+				_logger.LogDebug(NotifierString.debugQQWebSocketSendMessage);
 
 				var packets = GetSendPacket(config, records);
 
@@ -55,9 +55,9 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 				await client.Stop(WebSocketCloseStatus.NormalClosure, string.Empty);
 
-				_logger.LogDebug($"Done: {NotifierString.debugSendMessage}");
+				_logger.LogDebug($"Done: {NotifierString.debugQQWebSocketSendMessage}");
 			} catch (Exception) {
-				_logger.LogDebug($"Error: {NotifierString.debugSendMessage}");
+				_logger.LogDebug($"Error: {NotifierString.debugQQWebSocketSendMessage}");
 				throw;
 			} finally {
 				Dispose();

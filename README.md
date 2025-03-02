@@ -1,5 +1,5 @@
 # UbisoftGiveawayNotifier
-A CLI tool fetches free games info from Ubisoft giveaway page, sends notifications to Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer and Discord.
+A CLI tool fetches free games info from Ubisoft giveaway page, sends notifications to Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
 
 Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
 
@@ -54,6 +54,7 @@ Tested on Windows Server 2019/2022.
     - [https://github.com/azhuge233/RedditFreeGamesNotifier](https://github.com/azhuge233/RedditFreeGamesNotifier)
 - Epic Games Store
     - [https://github.com/azhuge233/EGSFreeGamesNotifier](https://github.com/azhuge233/EGSFreeGamesNotifier)
+    - [https://github.com/azhuge233/EGSMobileFreeGamesNotifier](https://github.com/azhuge233/EGSMobileFreeGamesNotifier)
 - SteamDB
     - [https://github.com/azhuge233/SteamDB-FreeGames](https://github.com/azhuge233/SteamDB-FreeGames)(Archived)
     - [https://github.com/azhuge233/SteamDB-FreeGames-dotnet](https://github.com/azhuge233/SteamDB-FreeGames-dotnet)(Not maintained)

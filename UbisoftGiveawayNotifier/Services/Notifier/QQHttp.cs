@@ -20,7 +20,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			try {
 				_logger.LogDebug(NotifierString.debugQQPusherSendMessage);
 
-				string url = string.Format(NotifyFormatString.qqUrlFormat, config.QQHttpAddress, config.QQHttpPort, config.QQHttpToken);
+				string url = string.Format(NotifyFormatString.qqHttpUrlFormat, config.QQHttpAddress, config.QQHttpPort, config.QQHttpToken);
 
 				var sb = new StringBuilder();
 

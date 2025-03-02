@@ -16,7 +16,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 		}
 
 		private WebsocketClient GetWSClient(NotifyConfig config) {
-			var url = new Uri(string.Format(NotifyFormatString.qqRedUrlFormat, config.QQWebSocketAddress, config.QQWebSocketPort, config.QQWebSocketToken));
+			var url = new Uri(string.Format(NotifyFormatString.qqWebSocketUrlFormat, config.QQWebSocketAddress, config.QQWebSocketPort, config.QQWebSocketToken));
 
 			#region new websocket client
 			var client = new WebsocketClient(url);

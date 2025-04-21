@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -19,15 +19,15 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.11.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
     <PackageReference Include="MimeKit" Version="4.11.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.4.0" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.4.0" />
-    <PackageReference Include="Telegram.Bot" Version="22.4.4" />
+    <PackageReference Include="Telegram.Bot" Version="22.5.1" />
     <PackageReference Include="Websocket.Client" Version="5.1.2" />
 		<!--<PackageReference Include="Microsoft.Playwright" Version="1.44.0" />-->
 		<!--<PackageReference Include="HtmlAgilityPack" Version="1.11.61" />-->

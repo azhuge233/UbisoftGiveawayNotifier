@@ -9,12 +9,14 @@ using UbisoftGiveawayNotifier.Services.Notifier;
 
 namespace UbisoftGiveawayNotifier.Modules {
 	internal static class DI {
+		private static readonly string BasePath = AppDomain.CurrentDomain.BaseDirectory;
+
 		private static readonly IConfigurationRoot logConfig = new ConfigurationBuilder()
-		   .SetBasePath(Directory.GetCurrentDirectory())
+		   .SetBasePath(BasePath)
 		   .Build();
 		private static readonly IConfigurationRoot configuration = new ConfigurationBuilder()
-		   .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("Config File/config.json", optional: false, reloadOnChange: true)
+		   .SetBasePath(BasePath)
+           .AddJsonFile($"Config File{Path.DirectorySeparatorChar}config.json", optional: false, reloadOnChange: true)
 		   .Build();
 
 		internal static IServiceProvider BuildAll() {

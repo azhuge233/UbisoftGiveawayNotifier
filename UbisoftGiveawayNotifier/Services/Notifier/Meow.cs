@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
 using UbisoftGiveawayNotifier.Models.Config;
@@ -7,14 +8,11 @@ using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class Meow: INotifiable {
-		private readonly ILogger<Meow> _logger;
+	internal class Meow(ILogger<Meow> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<Meow> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public Meow(ILogger<Meow> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(NotifierString.debugMeowSendMessage);
 

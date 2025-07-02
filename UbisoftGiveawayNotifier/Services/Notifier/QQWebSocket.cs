@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.WebSockets;
 using UbisoftGiveawayNotifier.Models.Config;
@@ -8,14 +9,11 @@ using UbisoftGiveawayNotifier.Strings;
 using Websocket.Client;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class QQWebSocket : INotifiable {
-		private readonly ILogger<QQWebSocket> _logger;
+	internal class QQWebSocket(ILogger<QQWebSocket> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<QQWebSocket> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public QQWebSocket(ILogger<QQWebSocket> logger) {
-			_logger = logger;
-		}
-
-		private WebsocketClient GetWSClient(NotifyConfig config) {
+		private WebsocketClient GetWSClient() {
 			var url = new Uri(string.Format(NotifyFormatString.qqWebSocketUrlFormat, config.QQWebSocketAddress, config.QQWebSocketPort, config.QQWebSocketToken));
 
 			#region new websocket client
@@ -28,7 +26,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			return client;
 		}
 
-		private static List<WSPacket> GetSendPacket(NotifyConfig config, List<FreeGameRecord> records) {
+		private List<WSPacket> GetSendPacket(List<FreeGameRecord> records) {
 			return records.Select(record => new WSPacket {
 				Action = NotifyFormatString.qqWebSocketSendAction,
 				Params = new Param { 
@@ -38,13 +36,13 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			}).ToList();
 		}
 
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(NotifierString.debugQQWebSocketSendMessage);
 
-				var packets = GetSendPacket(config, records);
+				var packets = GetSendPacket(records);
 
-				using var client = GetWSClient(config);
+				using var client = GetWSClient();
 
 				await client.Start();
 

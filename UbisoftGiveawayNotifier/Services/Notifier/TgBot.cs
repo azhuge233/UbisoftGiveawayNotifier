@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using UbisoftGiveawayNotifier.Models.Config;
@@ -7,14 +7,11 @@ using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class TgBot: INotifiable {
-		private readonly ILogger<TgBot> _logger;
+	internal class TgBot(ILogger<TgBot> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<TgBot> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public TgBot(ILogger<TgBot> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			var BotClient = new TelegramBotClient(token: config.TelegramToken ?? string.Empty);
 
 			try {

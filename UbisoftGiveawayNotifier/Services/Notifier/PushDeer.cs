@@ -1,21 +1,19 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Text;
 using System.Web;
-using Microsoft.Extensions.Logging;
-using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Models.Config;
+using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class PushDeer: INotifiable {
-		private readonly ILogger<PushDeer> _logger;
+	internal class PushDeer(ILogger<PushDeer> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<PushDeer> _logger = logger;
+		private readonly Config config = config.Value;
 
 		private HttpClient Client { get; set; } = new HttpClient();
 
-		public PushDeer(ILogger<PushDeer> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(NotifierString.debugPushDeerSendMessage);
 

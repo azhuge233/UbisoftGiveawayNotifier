@@ -9,16 +9,15 @@ namespace UbisoftGiveawayNotifier {
 
         static async Task Main() {
             try {
-                var servicesProvider = DI.BuildDiAll();
+                var servicesProvider = DI.BuildAll();
 
                 logger.Info(" - Start Job -");
 
                 using (servicesProvider as IDisposable) {
                     var jsonOp = servicesProvider.GetRequiredService<JsonOP>();
 
-                    var config = jsonOp.LoadConfig();
                     var oldRecord = jsonOp.LoadData();
-                    servicesProvider.GetRequiredService<ConfigValidator>().CheckValid(config);
+                    servicesProvider.GetRequiredService<ConfigValidator>().CheckValid();
 
                     // Get page source
                     var source = await servicesProvider.GetRequiredService<Scraper>().GetUbisoftSource();
@@ -28,7 +27,7 @@ namespace UbisoftGiveawayNotifier {
                     var parseResult = servicesProvider.GetRequiredService<Parser>().Parse(source, oldRecord);
 
                     // Notify first, then write records
-                    await servicesProvider.GetRequiredService<NotifyOP>().Notify(config, parseResult.Item2);
+                    await servicesProvider.GetRequiredService<NotifyOP>().Notify(parseResult.Item2);
 
                     // Write new records
                     jsonOp.WriteData(parseResult.Item1);

@@ -1,19 +1,17 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Text;
 using System.Web;
-using Microsoft.Extensions.Logging;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class PushPlus: INotifiable {
-		private readonly ILogger<PushPlus> _logger;
+	internal class PushPlus(ILogger<PushPlus> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<PushPlus> _logger = logger;
+		private readonly Config config = config.Value;
 
 		private HttpClient Client { get; set; } = new HttpClient();
-
-		public PushPlus(ILogger<PushPlus> logger) {
-			_logger = logger;
-		}
 
 		private string CreateMessage(List<FreeGameRecord> records) {
 			try {
@@ -35,7 +33,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			}
 		}
 
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(NotifierString.debugPushPlusSendMessage);
 

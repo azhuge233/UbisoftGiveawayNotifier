@@ -1,18 +1,16 @@
-﻿using System.Text;
+﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MimeKit;
-using MailKit.Net.Smtp;
-using UbisoftGiveawayNotifier.Strings;
+using System.Text;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
+using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class Email: INotifiable {
-		private readonly ILogger<Email> _logger;
-
-		public Email(ILogger<Email> logger) {
-			_logger = logger;
-		}
+	internal class Email(ILogger<Email> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<Email> _logger = logger;
+		private readonly Config config = config.Value;
 
 		private MimeMessage CreateMessage(List<FreeGameRecord> pushList, string fromAddress, string toAddress) {
 			try {
@@ -46,7 +44,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 			}
 		}
 
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(NotifierString.debugEmailSendMessage);
 

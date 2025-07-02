@@ -1,20 +1,18 @@
-﻿using System.Text;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using UbisoftGiveawayNotifier.Models.PostContent;
+using System.Text;
 using UbisoftGiveawayNotifier.Models.Config;
+using UbisoftGiveawayNotifier.Models.PostContent;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class DingTalk: INotifiable {
-		private readonly ILogger<DingTalk> _logger;
+	internal class DingTalk(ILogger<DingTalk> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<DingTalk> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public DingTalk(ILogger<DingTalk> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(NotifierString.debugDingTalkSendMessage);
 

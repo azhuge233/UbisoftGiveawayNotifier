@@ -1,21 +1,19 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Text;
 using System.Web;
-using Microsoft.Extensions.Logging;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services.Notifier {
-	internal class Barker: INotifiable {
-		private readonly ILogger<Barker> _logger;
+	internal class Barker(ILogger<Barker> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<Barker> _logger = logger;
+		private readonly Config config = config.Value;
 
 		private HttpClient Client { get; set; } = new HttpClient();
 
-		public Barker(ILogger<Barker> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				var sb = new StringBuilder();
 				string url = new StringBuilder().AppendFormat(NotifyFormatString.barkUrlFormat, config.BarkAddress, config.BarkToken).ToString();

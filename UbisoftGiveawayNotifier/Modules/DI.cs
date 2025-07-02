@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Notifier;
 using UbisoftGiveawayNotifier.Services;
 using UbisoftGiveawayNotifier.Services.Notifier;
@@ -11,8 +12,12 @@ namespace UbisoftGiveawayNotifier.Modules {
 		private static readonly IConfigurationRoot logConfig = new ConfigurationBuilder()
 		   .SetBasePath(Directory.GetCurrentDirectory())
 		   .Build();
+		private static readonly IConfigurationRoot configuration = new ConfigurationBuilder()
+		   .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("Config File/config.json", optional: false, reloadOnChange: true)
+		   .Build();
 
-		internal static IServiceProvider BuildDiAll() {
+		internal static IServiceProvider BuildAll() {
             return new ServiceCollection()
                .AddTransient<JsonOP>()
                .AddTransient<ConfigValidator>()
@@ -29,27 +34,7 @@ namespace UbisoftGiveawayNotifier.Modules {
                .AddTransient<PushDeer>()
 			   .AddTransient<Discord>()
                .AddTransient<Meow>()
-			   .AddLogging(loggingBuilder => {
-                   // configure Logging with NLog
-                   loggingBuilder.ClearProviders();
-                   loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-                   loggingBuilder.AddNLog(logConfig);
-               })
-               .BuildServiceProvider();
-        }
-
-        internal static IServiceProvider BuildDiNotifierOnly() {
-            return new ServiceCollection()
-               .AddTransient<TgBot>()
-               .AddTransient<Barker>()
-               .AddTransient<Email>()
-               .AddTransient<QQHttp>()
-			   .AddTransient<QQWebSocket>()
-			   .AddTransient<PushPlus>()
-               .AddTransient<DingTalk>()
-               .AddTransient<PushDeer>()
-			   .AddTransient<Discord>()
-			   .AddTransient<Meow>()
+               .Configure<Config>(configuration)
 			   .AddLogging(loggingBuilder => {
                    // configure Logging with NLog
                    loggingBuilder.ClearProviders();

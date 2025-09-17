@@ -24,7 +24,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.9" />
     <PackageReference Include="MimeKit" Version="4.13.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NLog" Version="6.0.4" />
     <PackageReference Include="NLog.Extensions.Logging" Version="6.0.4" />
 		<PackageReference Include="NLog.Targets.Mail" Version="6.0.3" />

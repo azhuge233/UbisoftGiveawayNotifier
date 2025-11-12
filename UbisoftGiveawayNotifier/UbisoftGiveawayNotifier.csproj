@@ -19,10 +19,10 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.14.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
     <PackageReference Include="MimeKit" Version="4.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NLog" Version="6.0.6" />
@@ -43,7 +43,7 @@
 
 	<ItemGroup>
 
-	  <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.10" />
+	  <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.11" />
 		<None Update="Config File\config.json" CopyToOutputDirectory="PreserveNewest" />
 		<None Update="Records\records.json" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>

@@ -3,11 +3,11 @@ A CLI tool fetches free games info from Ubisoft giveaway page, sends notificatio
 
 Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
 
-> Currently I'm only using the `Don't miss` section on [this official page](https://www.ubisoft.com/en-us/games/free) to get Ubisoft's giveaway (or free promotion) information, and it's not always showing games that can be counted as giveaway (the `FREE TO PLAY` and `DEMOS & TRIALS` section is definitely not giveaway btw).
+> Currently I'm only using the `Don't miss` section on [this official page](https://www.ubisoft.com/en-us/games/free) to get Ubisoft's giveaway (or free promotion) information, and it's not always showing games that can be counted as giveaway (the `FREE TO PLAY` and `DEMOS & TRIALS` section is definitely not giveaway).
 > 
-> Frankly I'm not quite sure Ubisoft will host a giveaway any more.
+> I don't believe Ubisoft will ever host a giveaway again.
 > 
-> And if you have a better info source, tell me by creating issues.
+> If you ever come across a reliable info source, let me know by creating issue.
 
 ## Build
 

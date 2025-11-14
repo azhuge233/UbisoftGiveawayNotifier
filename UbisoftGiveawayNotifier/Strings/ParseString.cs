@@ -5,22 +5,10 @@
 		#endregion
 
 		#region XPaths
-		//internal const string giveawayPageFreeGamesXPath = ".//div[@class=\'free-event\']";
-		//internal const string storePageFreeGamesXPath = ".//div[@class=\'product-tile card\']";
-
-		//internal const string giveawayPageFreeTypeXPath = ".//div[@class=\'free-event-type\']//span";
-		//internal const string giveawayPageFreeGameALableXPath = ".//a";
-
-		//internal const string storePageFreeGameALableXPath = ".//a[@class=\'thumb-link\']";
-		//internal const string storePageFreeGameNameXPath = ".//div[@class=\'prod-title\']";
-		//internal const string storePageFreeGameBannerXPath = ".//div[@class=\'card-label giveaway\']";
-		#endregion
-
-		#region Giveaway Page Related
-		//internal const string giveawayPageFreeTypeString = "Game giveaway";
-		//internal const string giveawayPageFreeGameUrlAttr = "data-url";
-		//internal const string giveawayPageFreeGameNameAttr = "data-name";
-		//internal const string giveawayPageFreeGameNameExtension = "ignt";
+		internal const string liXPath = ".//div[@id='main']//div[@class='product-grid-container']//div[contains(@class, 'search-result-content')]//div[@class='samples']//ul//li[contains(@class, 'grid-tile')]";
+		internal const string giveawaySpanXPath = ".//span[contains(@class, 'giveaway')]";
+		internal const string gameTitleDivXPath = ".//div[@class='prod-title']";
+		internal const string gameUrlAXPath = ".//a[@class='thumb-link']";
 		#endregion
 
 		#region Store Page Related
@@ -28,11 +16,11 @@
 		#endregion
 
 		internal const string removeSpecialCharsRegex = @"[^0-9a-zA-Z]+";
-		internal const string storeRootUrlFormat = "https://store.ubi.com{0}";
+		internal const string storeRootUrl = "https://store.ubi.com";
 
 		#region debug strings
 		internal const string debugHtmlParser = "Parse";
-		internal const string debugNoRecordDetected = "No record detected!";
+		internal const string debugNoGiveawayDetected = "No giveaway detected!";
 		internal const string infoGameFound = "Found game: {gameName}.";
 		internal const string infoAddToList = "Added game {gameName} to list";
 		internal const string infoFoundInPreviousRecords = "{gameName} is found in previous records, stop adding in list";

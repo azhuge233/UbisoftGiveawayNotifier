@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using UbisoftGiveawayNotifier.Strings;
 using UbisoftGiveawayNotifier.Models.Record;
-using UbisoftGiveawayNotifier.Models.UbisoftGraphQLJsonData;
-using Newtonsoft.Json;
-using System.Text.Json;
+using HtmlAgilityPack;
 
 namespace UbisoftGiveawayNotifier.Services {
 	internal class Parser(ILogger<Parser> logger) : IDisposable {
@@ -12,37 +10,42 @@ namespace UbisoftGiveawayNotifier.Services {
 		public Tuple<List<FreeGameRecord>, List<FreeGameRecord>> Parse(string source, List<FreeGameRecord> oldRecords) {
 			try {
 				_logger.LogDebug(ParseString.debugHtmlParser);
-				_logger.LogDebug(System.Text.Json.JsonSerializer.Serialize(JsonDocument.Parse(source), options: new() { WriteIndented = true }));
 
 				var resultList = new List<FreeGameRecord>();
 				var pushList = new List<FreeGameRecord>();
 
-				JsonData data = JsonConvert.DeserializeObject<JsonData>(source);
+				var htmlDoc = new HtmlDocument();
+				htmlDoc.LoadHtml(source);
 
-				if (data != null && !data.Data.PromoMaster.Item.Title.Contains(ParseString.NoPromotionTitle)) {
-					string gameName = data.Data.PromoMaster.Item.Title;
-					string gameUrl = data.Data.PromoMaster.Item.Content;
+				var lis = htmlDoc.DocumentNode.SelectNodes(ParseString.liXPath).ToList();
 
-					if (data.Data.PromoMaster.Item.ButtonsMaster.Items.First() != null)
-						gameUrl = data.Data.PromoMaster.Item.ButtonsMaster.Items.First().LocalizedItems.ButtonUrl;
+				var giveawaylis = lis.Where(li => li.SelectSingleNode(ParseString.giveawaySpanXPath) != null).ToList();
 
-					_logger.LogInformation(ParseString.infoGameFound, gameName);
+				if (giveawaylis.Count > 0) {
+					foreach (var li in giveawaylis) {
+						string gameName = li.SelectSingleNode(ParseString.gameTitleDivXPath).InnerText.Trim();
+						string gameUrlPath = li.SelectSingleNode(ParseString.gameUrlAXPath).Attributes[ParseString.storePageFreeGameUrlAttr].Value.Split('?').First();
+						string gameUrlFull = $"{ParseString.storeRootUrl}{gameUrlPath}";
 
-					var newFreeGame = new FreeGameRecord() {
-						Name = gameName,
-						Url = gameUrl
-					};
+						_logger.LogInformation(ParseString.infoGameFound, gameName);
+						_logger.LogDebug($"{gameName} | {gameUrlFull}");
 
-					resultList.Add(newFreeGame);
+						var newFreeGame = new FreeGameRecord() {
+							Name = gameName,
+							Url = gameUrlFull
+						};
 
-					if (oldRecords.Count == 0 || !oldRecords.Exists(record => record.Name == gameName && record.Url == gameUrl)) {
-						pushList.Add(newFreeGame);
-						_logger.LogInformation(ParseString.infoAddToList, gameName);
-					} else _logger.LogInformation(ParseString.infoFoundInPreviousRecords, gameName);
-				} else _logger.LogInformation(ParseString.debugNoRecordDetected);
+						resultList.Add(newFreeGame);
+
+						if (oldRecords.Count == 0 || !oldRecords.Exists(record => record.Name == gameName && record.Url == gameUrlFull)) {
+							pushList.Add(newFreeGame);
+							_logger.LogInformation(ParseString.infoAddToList, gameName);
+						} else _logger.LogInformation(ParseString.infoFoundInPreviousRecords, gameName);
+					}
+				} else _logger.LogInformation(ParseString.debugNoGiveawayDetected);
 
 				_logger.LogDebug($"Done: {ParseString.debugHtmlParser}");
-				return new (resultList, pushList);
+				return new(resultList, pushList);
 			} catch (Exception) {
 				_logger.LogError($"Error: {ParseString.debugHtmlParser}");
 				throw;

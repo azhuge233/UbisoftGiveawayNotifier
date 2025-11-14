@@ -17,6 +17,7 @@
 
 		internal const string removeSpecialCharsRegex = @"[^0-9a-zA-Z]+";
 		internal const string storeRootUrl = "https://store.ubi.com";
+		internal const string possibleClaimLinkFormat = "https://register.ubisoft.com/{0}_Free/en-GB";
 
 		#region debug strings
 		internal const string debugHtmlParser = "Parse";

@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using UbisoftGiveawayNotifier.Strings;
+﻿using HtmlAgilityPack;
+using Microsoft.Extensions.Logging;
+using System.Text.RegularExpressions;
 using UbisoftGiveawayNotifier.Models.Record;
-using HtmlAgilityPack;
+using UbisoftGiveawayNotifier.Strings;
 
 namespace UbisoftGiveawayNotifier.Services {
 	internal class Parser(ILogger<Parser> logger) : IDisposable {
@@ -32,7 +33,8 @@ namespace UbisoftGiveawayNotifier.Services {
 
 						var newFreeGame = new FreeGameRecord() {
 							Name = gameName,
-							Url = gameUrlFull
+							Url = gameUrlFull,
+							PossibleClaimLink = string.Format(ParseString.possibleClaimLinkFormat, RemoveSpecialCharacters(gameName))
 						};
 
 						resultList.Add(newFreeGame);
@@ -52,6 +54,11 @@ namespace UbisoftGiveawayNotifier.Services {
 			} finally {
 				Dispose();
 			}
+		}
+
+		private static string RemoveSpecialCharacters(string str) {
+			if (str == null) return string.Empty;
+			return Regex.Replace(str, ParseString.removeSpecialCharsRegex, string.Empty);
 		}
 
 		public void Dispose() {

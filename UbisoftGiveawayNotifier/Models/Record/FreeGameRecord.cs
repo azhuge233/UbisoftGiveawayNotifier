@@ -8,6 +8,7 @@ namespace UbisoftGiveawayNotifier.Models.Record {
 
 		public string Name { get; set; }
 
+		public string PossibleClaimLink { get; set; }
 		private static string RemoveSpecialCharacters(string str) {
 			if (str == null) return string.Empty;
 			return Regex.Replace(str, ParseString.removeSpecialCharsRegex, string.Empty);

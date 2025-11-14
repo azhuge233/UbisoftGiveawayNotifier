@@ -75,11 +75,11 @@ namespace UbisoftGiveawayNotifier.Services {
 			page.SetDefaultTimeout(_config.TimeOutMilliSecond);
 			page.SetDefaultNavigationTimeout(_config.TimeOutMilliSecond);
 			await page.RouteAsync("**/*", async route => {
-				var blockList = new List<string> { 
+				var resourceBlockList = new List<string> { 
 					"image", 
 					"font" 
 				};
-				if (blockList.Contains(route.Request.ResourceType)) await route.AbortAsync();
+				if (resourceBlockList.Contains(route.Request.ResourceType) || !route.Request.Url.Contains(ScrapeString.storeCookieDomain)) await route.AbortAsync();
 				else await route.ContinueAsync();
 			});
 

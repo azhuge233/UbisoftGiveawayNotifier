@@ -1,41 +1,50 @@
 ﻿namespace UbisoftGiveawayNotifier.Strings {
 	internal class NotifyFormatString {
 		#region record string
-		internal const string telegramPushFormat = 
-			"<b>Ubisoft</b>\n\n" + 
-			"<b>{0}</b>\n" + 
-			"Link: <a href=\"{1}\" > {0}</a>\n\n" + 
-			"#Ubisoft #{2}";
+		internal const string telegramPushFormat =
+			"<b>Ubisoft Giveaway</b>\n\n" +
+			"<b>{0}</b>\n" +
+			"Link: <a href=\"{1}\" >{0}</a>\n" +
+			"Possible Claim Link: <a href=\"{2}\" >{2}</a>\n\n" +
+			"#Ubisoft #{3}";
 		internal const string barkPushFormat =
 			"{0}\n" +
-			"Link: {1}";
+			"Link: {1}\n" +
+			"Possible Claim Link: {2}";
 		internal const string emailPushHtmlFormat =
 			"<p><b>{0}</b><br>" +
-			"Link: <a href=\"{1}\" > {0}</a><br>";
+			"Link: <a href=\"{1}\" >{0}</a><br>" +
+			"Possible Claim Link: <a href=\"{2}\" >{2}</a><br>";
 		internal const string qqPushFormat =
 			imTitle +
 			"{0}\n" +
-			"Link: {1}";
+			"Link: {1}\n" +
+			"Possible Claim Link: {2}";
 		internal const string pushPlusPushHtmlFormat =
 			"<p><b>{0}</b><br>" +
-			"Link: <a href=\"{1}\" > {0}</a><br>";
+			"Link: <a href=\"{1}\" >{0}</a><br>" +
+			"Possible Claim Link: <a href=\"{2}\" >{2}</a><br>";
 		internal const string dingTalkPushFormat =
 			imTitle +
 			"{0}\n" +
-			"Link: {1}";
+			"Link: {1}" +
+			"Possible Claim Link: {2}";
 		internal const string pushDeerPushFormat =
 			imTitle +
 			"{0}\n" +
-			"Link: {1}";
+			"Link: {1}" +
+			"Possible Claim Link: {2}";
 		internal const string discordPushFormat =
-			"Link: {0}";
+			"Link: {0}" +
+			"Possible Claim Link: {1}";
 		internal const string meowPushFormat =
 			"{0}\n" +
-			"Link: {1}";
+			"Link: {1}" +
+			"Possible Claim Link: {2}";
 		#endregion
 
 		#region url, title format string
-		internal const string imTitle = "Ubisoft\n\n";
+		internal const string imTitle = "Ubisoft Giveaway\n\n";
 
 		internal const string barkUrlFormat = "{0}/{1}/";
 		internal const string barkUrlTitle = "UbisoftGiveawayNotifier/";

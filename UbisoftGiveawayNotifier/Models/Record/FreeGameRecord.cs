@@ -9,44 +9,45 @@ namespace UbisoftGiveawayNotifier.Models.Record {
 		public string Name { get; set; }
 
 		public string PossibleClaimLink { get; set; }
+
 		private static string RemoveSpecialCharacters(string str) {
 			if (str == null) return string.Empty;
 			return Regex.Replace(str, ParseString.removeSpecialCharsRegex, string.Empty);
 		}
 
 		internal string ToTelegramMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.telegramPushFormat, Name, Url, RemoveSpecialCharacters(Name)).ToString();
+			return string.Format(NotifyFormatString.telegramPushFormat, Name, Url, PossibleClaimLink, RemoveSpecialCharacters(Name));
 		}
 
 		internal string ToBarkMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.barkPushFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.barkPushFormat, Name, Url, PossibleClaimLink);
 		}
 
 		internal string ToDingTalkMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.dingTalkPushFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.dingTalkPushFormat, Name, Url, PossibleClaimLink);
 		}
 
 		internal string ToEmailMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.emailPushHtmlFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.emailPushHtmlFormat, Name, Url, PossibleClaimLink);
 		}
 		internal string ToPushPlusMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.pushPlusPushHtmlFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.pushPlusPushHtmlFormat, Name, Url, PossibleClaimLink);
 		}
 
 		internal string ToQQMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.qqPushFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.qqPushFormat, Name, Url, PossibleClaimLink);
 		}
 
 		internal string ToPushDeerMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.pushDeerPushFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.pushDeerPushFormat, Name, Url, PossibleClaimLink);
 		}
 
 		internal string ToDiscordMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.discordPushFormat, Url).ToString();
+			return string.Format(NotifyFormatString.discordPushFormat, Url, PossibleClaimLink);
 		}
 
 		internal string ToMeowMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.meowPushFormat, Name, Url).ToString();
+			return string.Format(NotifyFormatString.meowPushFormat, Name, Url, PossibleClaimLink);
 		}
 	}
 }

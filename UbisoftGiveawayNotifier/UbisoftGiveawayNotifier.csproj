@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
 	  <RootNamespace>UbisoftGiveawayNotifier</RootNamespace>
-		<PublishSingleFile>false</PublishSingleFile>
+		<PublishSingleFile>true</PublishSingleFile>
 		<PublishTrimmed>false</PublishTrimmed>
 		<SelfContained>true</SelfContained>
 		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>

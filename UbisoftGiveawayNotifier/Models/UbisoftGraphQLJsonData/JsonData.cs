@@ -1,69 +1,69 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace UbisoftGiveawayNotifier.Models.UbisoftGraphQLJsonData {
 	public class JsonData {
-		[JsonProperty("data")]
+		[JsonPropertyName("data")]
 		public Data Data { get; set; }
 	}
 
 	public class Data {
-		[JsonProperty("promoMaster")]
+		[JsonPropertyName("promoMaster")]
 		public PromoMaster PromoMaster { get; set; }
 	}
 
 	public class Sys {
-		[JsonProperty("id")]
+		[JsonPropertyName("id")]
 		public string ID { get; set; }
 	}
 
 	public class PromoMaster {
-		[JsonProperty("sys")]
+		[JsonPropertyName("sys")]
 		public Sys Sys { get; set; }
 
-		[JsonProperty("item")]
+		[JsonPropertyName("item")]
 		public PromoMasterItem Item { get; set; }
 	}
 
 	public class PromoMasterItem {
-		[JsonProperty("sys")]
+		[JsonPropertyName("sys")]
 		public Sys Sys { get; set; }
 
-		[JsonProperty("title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
 
-		[JsonProperty("subtitle")]
+		[JsonPropertyName("subtitle")]
 		public string Subtitle { get; set; }
 
-		[JsonProperty("content")]
+		[JsonPropertyName("content")]
 		public string Content { get; set; }
 
-		[JsonProperty("buttonsMaster")]
+		[JsonPropertyName("buttonsMaster")]
 		public ButtonsMaster ButtonsMaster {  get; set; }
 	}
 
 	public class ButtonsMaster {
-		[JsonProperty("items")]
+		[JsonPropertyName("items")]
 		public List<ButtonsMasterItem> Items { get; set; }
 	}
 
 	public class ButtonsMasterItem {
-		[JsonProperty("sys")]
+		[JsonPropertyName("sys")]
 		public Sys Sys { get; set; }
 
-		[JsonProperty("localizedItems")]
+		[JsonPropertyName("localizedItems")]
 		public LocalizedItems LocalizedItems { get; set; }
 
 
 	}
 
 	public class LocalizedItems {
-		[JsonProperty("sys")]
+		[JsonPropertyName("sys")]
 		public Sys Sys { get; set; }
 
-		[JsonProperty("buttonText")]
+		[JsonPropertyName("buttonText")]
 		public string ButtonText {  get; set; }
 
-		[JsonProperty("buttonUrl")]
+		[JsonPropertyName("buttonUrl")]
 		public string ButtonUrl { get; set; }
 	}
 }

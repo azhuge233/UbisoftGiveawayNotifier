@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Net.WebSockets;
+using System.Text.Json;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Models.WebSocketContent;
@@ -47,7 +47,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 				await client.Start();
 
 				foreach (var packet in packets) {
-					await client.SendInstant(JsonConvert.SerializeObject(packet));
+					await client.SendInstant(JsonSerializer.Serialize(packet));
 					await Task.Delay(600);
 				}
 

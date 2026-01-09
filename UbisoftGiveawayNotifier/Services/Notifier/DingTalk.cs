@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.PostContent;
 using UbisoftGiveawayNotifier.Models.Record;
@@ -25,7 +25,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 				foreach (var record in records) {
 					content.Text.Content_ = $"{record.ToDingTalkMessage()}{NotifyFormatString.projectLink}";
-					data = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+					data = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
 					resp = await client.PostAsync(url, data);
 					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
 				}

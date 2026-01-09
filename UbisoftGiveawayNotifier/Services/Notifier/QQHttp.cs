@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
 using UbisoftGiveawayNotifier.Models.Config;
 using UbisoftGiveawayNotifier.Models.PostContent;
 using UbisoftGiveawayNotifier.Models.Record;
@@ -34,7 +34,7 @@ namespace UbisoftGiveawayNotifier.Services.Notifier {
 
 					content.Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}";
 
-					data = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+					data = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
 					resp = await Client.PostAsync(url, data);
 
 					_logger.LogDebug(await resp.Content.ReadAsStringAsync());

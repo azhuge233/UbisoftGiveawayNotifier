@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
 using UbisoftGiveawayNotifier.Models.Record;
 using UbisoftGiveawayNotifier.Strings;
 
@@ -11,7 +11,7 @@ namespace UbisoftGiveawayNotifier.Services {
 			try {
 				if (data.Count > 0) {
 					_logger.LogDebug(JsonOPString.debugWrite);
-					string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+					string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
 					File.WriteAllText(JsonOPString.recordsPath, string.Empty);
 					File.WriteAllText(JsonOPString.recordsPath, json);
 					_logger.LogDebug($"Done: {JsonOPString.debugWrite}");
@@ -27,7 +27,7 @@ namespace UbisoftGiveawayNotifier.Services {
 		public List<FreeGameRecord> LoadData() {
 			try {
 				_logger.LogDebug(JsonOPString.debugLoadRecords);
-				var content = JsonConvert.DeserializeObject<List<FreeGameRecord>>(File.ReadAllText(JsonOPString.recordsPath));
+				var content = JsonSerializer.Deserialize<List<FreeGameRecord>>(File.ReadAllText(JsonOPString.recordsPath));
 				_logger.LogDebug($"Done: {JsonOPString.debugLoadRecords}");
 				return content ?? new List<FreeGameRecord>();
 			} catch (Exception) {

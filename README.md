@@ -1,7 +1,7 @@
 # UbisoftGiveawayNotifier
 A CLI tool fetches free games info from Ubisoft giveaway page, sends notifications to Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
 
-Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
+Demo Telegram Channel [@azhuge233_FreeGames](https://telegram.me/azhuge233_FreeGames)
 
 > Currently I'm using [this official page](https://store.ubisoft.com/us/free-games) to get Ubisoft's giveaway information. If you ever come across another reliable info source, let me know by creating issue.
 > 
